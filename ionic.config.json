@@ -1,0 +1,7 @@
+{
+  "name": "dividend-calculator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
