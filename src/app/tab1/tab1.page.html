@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-        {{ "header.menu.calculator" | translate }}
-    </ion-title>
+      <ion-segment value="all">
+          <ion-segment-button value="input">
+              <ion-label>{{ "calculator.form.title" | translate }}</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="results">
+              <ion-label>{{ "calculator.result.title" | translate }}</ion-label>
+          </ion-segment-button>
+      </ion-segment>
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +18,108 @@
     </ion-toolbar>
   </ion-header>
 
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{ "calculator.form.title" | translate }}</ion-card-title>
+        </ion-card-header>
 
+        <ion-card-content>
+            <form [formGroup]="calculatorForm">
+                <ion-range
+                        aria-label="Custom range"
+                        [min]="1"
+                        [max]="100"
+                        [value]="5"
+                        [pin]="true"
+                        [ticks]="true"
+                        [snaps]="true"
+                        formControlName="years"
+                ></ion-range>
+                {{ "calculator.form.interval" | translate }}: {{ getYears() }}
+                ({{ "calculator.form.until" | translate }} {{ getUntilYear() }})
 
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.initialInvestment" | translate }}'
+                               type="number"
+                               formControlName="initialInvestment"></ion-input>
+                </ion-item>
 
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.initialDividends" | translate }}'
+                               type="number"
+                               formControlName="initialDividends"></ion-input>
+                </ion-item>
 
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.initialPriceGains" | translate }}'
+                               type="number"
+                               formControlName="initialPriceGains"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.priceGainPercentage" | translate }}'
+                               type="number"
+                               formControlName="priceGainPercentage"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.yearlyInvestment" | translate }}'
+                               type="number"
+                               formControlName="yearlyInvestment"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.yearlyInvestmentIncrease" | translate }}'
+                               type="number"
+                               formControlName="yearlyInvestmentIncrease"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.dividendReinvestmentPercentage" | translate }}'
+                               type="number"
+                               formControlName="dividendReinvestmentPercentage"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.initialDividendPercentage" | translate }}'
+                               type="number"
+                               formControlName="initialDividendPercentage"
+                               min="0" max="100"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.yearlyDividendPercentageIncrease" | translate }}'
+                               type="number"
+                               formControlName="yearlyDividendPercentageIncrease"
+                               min="0" max="100"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.taxPercentage" | translate }}'
+                               type="number"
+                               formControlName="taxPercentage"
+                               min="0" max="100"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input labelPlacement="stacked"
+                               label='{{ "calculator.form.yearlyTaxFreeSum" | translate }}'
+                               type="number"
+                               formControlName="yearlyTaxFreeSum">
+                    </ion-input>
+                </ion-item>
+
+            </form>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
