@@ -21,6 +21,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
 export class Tab1Page {
 
   segment = 'input';
+  resultViews = 'table';
 
   calculatorForm!: FormGroup;
   showStockColumns = false;
@@ -219,5 +220,29 @@ export class Tab1Page {
       block: 'center',
       inline: 'center'
     });
+  }
+
+  showResultTable() {
+    this.resultViews = 'table';
+
+    const element = document.getElementById('table');
+    element!.click();
+    this.focusSegment('table');
+  }
+
+  showResultSummary() {
+    this.resultViews = 'summary';
+
+    const element = document.getElementById('summary');
+    element!.click();
+    this.focusSegment('summary');
+  }
+
+  showResultGraph() {
+    this.resultViews = 'graph';
+
+    const element = document.getElementById('graph');
+    element!.click();
+    this.focusSegment('graph');
   }
 }

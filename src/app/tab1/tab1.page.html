@@ -12,11 +12,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-segment [value]="resultViews" *ngIf="segment === 'results'">
+        <ion-segment-button value="table" id="table" (click)="showResultTable()">
+            <ion-label>{{ "calculator.result.title" | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="summary" id="summary" (click)="showResultSummary()">
+            <ion-label>{{ "calculator.summary.title" | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="graph" id="graph" (click)="showResultGraph()">
+            <ion-label>{{ "calculator.graph.title" | translate }}</ion-label>
+        </ion-segment-button>
+    </ion-segment>
 
     <ion-card *ngIf="segment === 'input'">
         <ion-card-header>
@@ -141,7 +147,7 @@
                 <ion-row class="tableHeader">
 
                     <ion-col>{{ "calculator.result.tblheader.col-1" | translate }}</ion-col>
-                    <ion-col *ngIf="showStockColumns"
+                    <ion-col *ngIf="showStockColumns" id="stock-price-simulation-trigger"
                         matTooltip="{{ 'calculator.result.tblheader.col-2-tt' | translate }}">
                         {{ "calculator.result.tblheader.col-2" | translate }}
                     </ion-col>
