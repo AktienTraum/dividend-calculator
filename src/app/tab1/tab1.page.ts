@@ -18,9 +18,11 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-field-inside-dialog-workaround'}},
   ]
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page {
+
+  segment = 'input';
+
   calculatorForm!: FormGroup;
-  showResult = false;
   showStockColumns = false;
 
   currentYear!: number;
@@ -49,12 +51,6 @@ export class Tab1Page implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.calculatorForm.valueChanges.subscribe(value => {
-      this.showResult = false;
-    });
-  }
-
   initForm() {
     this.calculatorForm = new FormGroup({
       initialInvestment: new FormControl(numberAttribute(10000)),
@@ -73,7 +69,8 @@ export class Tab1Page implements OnInit {
   }
 
   doCalculate() {
-    this.showResult = true;
+    this.showResult();
+
     this.result = this.calculatorService.calculate(this.getFormValues());
 
     /*this.dataPayments = this.graphService.getPaymentData(this.result,
@@ -198,5 +195,29 @@ export class Tab1Page implements OnInit {
         this.calculatorForm.controls['initialInvestment'].value * 100;
     }
     return this.translate.instant('calculator.form.initialPriceGains-percentage') + ': ' + result.toFixed(2) + '%';
+  }
+
+  showInput() {
+    this.segment = 'input';
+
+    const element = document.getElementById('input');
+    element!.click();
+    this.focusSegment('input');
+  }
+
+  showResult() {
+    this.segment = 'results';
+
+    const element = document.getElementById('results');
+    element!.click();
+    this.focusSegment('results');
+  }
+
+  focusSegment(segment: string) {
+    document.getElementById(segment)!.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center'
+    });
   }
 }
