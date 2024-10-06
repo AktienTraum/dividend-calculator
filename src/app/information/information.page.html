@@ -1,14 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-
+    <ion-segment [value]="segment">
+      <ion-segment-button value="about" id="about" (click)="showAbout()">
+        <ion-label>{{ "header.menu.about" | translate }}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="imprint" id="imprint" (click)="showImprint()">
+        <ion-label>{{ "header.menu.imprint" | translate }}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="privacy" id="privacy" (click)="showPrivacy()">
+        <ion-label>{{ "header.menu.privacy" | translate }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-
-    </ion-toolbar>
-  </ion-header>
-
+  <app-about *ngIf="segment === 'about'"></app-about>
+  <app-imprint *ngIf="segment === 'imprint'"></app-imprint>
+  <app-privacy *ngIf="segment === 'privacy'"></app-privacy>
 </ion-content>

@@ -1,0 +1,39 @@
+.about {
+  text-align: center;
+}
+
+.paragraph {
+  margin-bottom: 16px;
+}
+
+.footer {
+  text-align: left;
+  display: flex;
+  background: #cccccc;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  justify-content: space-evenly;
+}
+
+.citation {
+  border-left: 2px solid #FFF;
+  margin-left: 64px;
+  padding-left: 8px;
+  width: 350px;
+}
+
+.citationText {
+  font-weight: normal;
+  color: black;
+  line-height: 150%;
+}
+
+.citationAuthor {
+  font-family: "Roboto Light", sans-serif;
+  font-weight: bold;
+  color: #8c8c8c;
+  font-size: 16px;
+  text-align: right;
+}

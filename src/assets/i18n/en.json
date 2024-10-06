@@ -7,19 +7,18 @@
       "community": "Community",
       "news": "News",
       "documentation": "Documentation",
-      "info": "About"
-    }
-  },
-  "footer": {
-    "menu": {
+      "about": "About",
       "imprint": "Imprint",
       "privacy": "Privacy Policy"
-    },
+    }
+  },
+  "about": {
+    "aktientraum": "Dividend Calculator - Version",
+    "disclaimer": "This is a non-commercial fun project. All calculations on this page are made without guarantee and no guarantee can or will be given for the accuracy of the results.",
     "cite": "If someone has good shares, they would be crazy to sell just because of a price setback. I look for companies that I understand and whose future prospects I am convinced of."
   },
   "calculator": {
     "result-header": "Results",
-    "disclaimer": "All calculations on this page are made without guarantee and no guarantee can or will be given for the accuracy of the results.",
     "result": {
       "title": "Detailed Results",
       "stocksimul": "Show stock simulation",

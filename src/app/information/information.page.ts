@@ -7,6 +7,19 @@ import { Component } from '@angular/core';
 })
 export class InformationPage {
 
+  segment = 'about';
+
   constructor() {}
 
+  showAbout() {
+    this.segment = 'about';
+  }
+
+  showImprint() {
+    this.segment = 'imprint';
+  }
+
+  showPrivacy() {
+    this.segment = 'privacy';
+  }
 }
