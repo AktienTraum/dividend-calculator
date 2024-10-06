@@ -15,30 +15,32 @@ import {MatIcon} from "@angular/material/icon";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatInput} from "@angular/material/input";
 import {MatFabButton} from "@angular/material/button";
+import {LineChartModule} from "@swimlane/ngx-charts";
 
 @NgModule({
-    imports: [
-        IonicModule,
-        CommonModule,
-        FormsModule,
-        ExploreContainerComponentModule,
-        Tab1PageRoutingModule,
-        NgxTranslateModule,
-        ReactiveFormsModule,
-        MatTooltip,
-        MatFormField,
-        MatCard,
-        MatCardHeader,
-        MatSlider,
-        MatCardContent,
-        MatIcon,
-        MatMenuTrigger,
-        MatMenu,
-        MatSliderThumb,
-        MatInput,
-        MatMenuItem,
-        MatFabButton
-    ],
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    ExploreContainerComponentModule,
+    Tab1PageRoutingModule,
+    NgxTranslateModule,
+    ReactiveFormsModule,
+    MatTooltip,
+    MatFormField,
+    MatCard,
+    MatCardHeader,
+    MatSlider,
+    MatCardContent,
+    MatIcon,
+    MatMenuTrigger,
+    MatMenu,
+    MatSliderThumb,
+    MatInput,
+    MatMenuItem,
+    MatFabButton,
+    LineChartModule
+  ],
   declarations: [CalculatorPage]
 })
 export class Tab1PageModule {}

@@ -303,4 +303,53 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+
+  <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
+    <ion-card-header>
+      <b>{{ "calculator.graph.investing.title" | translate }}</b>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="graph">
+        <ngx-charts-line-chart
+          [results]="dataPayments"
+          [view]="view"
+          [animations]="true"
+          [showGridLines]="true"
+          [legend]="true"
+          [legendTitle]="graphLegend()"
+          [legendPosition]="LegendPosition.Below"
+          [roundDomains]="true"
+          [xAxis]="true"
+          [yAxis]="true"
+          [yAxisTickFormatting]="currencyFormatterLC">
+        </ngx-charts-line-chart>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <p></p>
+
+  <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
+    <ion-card-header>
+      <b>{{ "calculator.graph.totalassets.title" | translate }}</b>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="graph">
+        <ngx-charts-line-chart
+          [results]="dataTotalAssets"
+          [view]="view"
+          [animations]="true"
+          [showGridLines]="true"
+          [legend]="true"
+          [legendTitle]="graphLegend()"
+          [legendPosition]="LegendPosition.Below"
+          [roundDomains]="true"
+          [xAxis]="true"
+          [yAxis]="true"
+          [yAxisTickFormatting]="currencyFormatterLC">
+        </ngx-charts-line-chart>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

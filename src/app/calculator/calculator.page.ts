@@ -9,6 +9,8 @@ import {StorageService} from "../storage/storage.service";
 import {ViewportScroller} from "@angular/common";
 import {ParameterIF} from "../interfaces/parameter-if";
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
+import {GraphService} from "../services/graph.service";
+import {LegendPosition} from "@swimlane/ngx-charts";
 
 @Component({
   selector: 'app-tab1',
@@ -32,7 +34,7 @@ export class CalculatorPage {
 
   dataPayments: any;
   dataTotalAssets: any;
-  view: [number, number] = [900, 450];
+  view: [number, number] = [800, 500];
 
   storageData: StorageIf[];
 
@@ -40,7 +42,7 @@ export class CalculatorPage {
     functions: FunctionsService,
     private translate: TranslateService,
     private calculatorService: CalculatorService,
-    //private graphService: GraphService,
+    private graphService: GraphService,
     private storageService: StorageService,
     private viewportScroller: ViewportScroller,
     //private toaster: NgToastService
@@ -74,7 +76,7 @@ export class CalculatorPage {
 
     this.result = this.calculatorService.calculate(this.getFormValues());
 
-    /*this.dataPayments = this.graphService.getPaymentData(this.result,
+    this.dataPayments = this.graphService.getPaymentData(this.result,
       this.currentYear,
       this.translate.instant('calculator.graph.investing.value-1'),
       this.translate.instant('calculator.graph.investing.value-2'),
@@ -83,7 +85,7 @@ export class CalculatorPage {
       this.currentYear,
       this.translate.instant('calculator.graph.totalassets.value-1'),
       this.translate.instant('calculator.graph.totalassets.value-2'),
-      this.translate.instant('calculator.graph.totalassets.value-3'));*/
+      this.translate.instant('calculator.graph.totalassets.value-3'));
 
     this.viewportScroller.scrollToPosition([0, 0]);
   }
@@ -245,4 +247,6 @@ export class CalculatorPage {
     element!.click();
     this.focusSegment('graph');
   }
+
+  protected readonly LegendPosition = LegendPosition;
 }
