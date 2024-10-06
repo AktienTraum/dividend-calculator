@@ -2,10 +2,10 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { CalculatorPage } from './calculator.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { Tab1PageRoutingModule } from './calculator-routing.module';
 import {NgxTranslateModule} from "../translate/translate.module";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatFormField} from "@angular/material/form-field";
@@ -39,6 +39,6 @@ import {MatFabButton} from "@angular/material/button";
         MatMenuItem,
         MatFabButton
     ],
-  declarations: [Tab1Page]
+  declarations: [CalculatorPage]
 })
 export class Tab1PageModule {}

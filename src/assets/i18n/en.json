@@ -20,7 +20,7 @@
     "result-header": "Results",
     "disclaimer": "All calculations on this page are made without guarantee and no guarantee can or will be given for the accuracy of the results.",
     "result": {
-      "title": "Development over time",
+      "title": "Detailed Results",
       "stocksimul": "Show stock simulation",
       "tblheader": {
         "col-1": "Year",
@@ -56,7 +56,7 @@
       }
     },
     "graph": {
-      "title": "Graphical Representation",
+      "title": "Graphs",
       "legend": "Legend",
       "investing": {
         "title": "Payments",

@@ -12,13 +12,13 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  templateUrl: 'calculator.page.html',
+  styleUrls: ['calculator.page.scss'],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-field-inside-dialog-workaround'}},
   ]
 })
-export class Tab1Page {
+export class CalculatorPage {
 
   segment = 'input';
   resultViews = 'table';

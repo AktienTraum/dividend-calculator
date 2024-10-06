@@ -25,10 +25,6 @@
     </ion-segment>
 
     <ion-card *ngIf="segment === 'input'">
-        <ion-card-header>
-            <ion-card-title>{{ "calculator.form.title" | translate }}</ion-card-title>
-        </ion-card-header>
-
         <ion-card-content>
             <form [formGroup]="calculatorForm">
                 <ion-range
@@ -134,11 +130,7 @@
     </ion-card>
 
 
-    <ion-card *ngIf="segment === 'results'">
-        <ion-card-header>
-            <ion-card-title>{{ "calculator.result-header" | translate }}</ion-card-title>
-        </ion-card-header>
-
+    <ion-card *ngIf="segment === 'results' && resultViews === 'table'">
         <ion-card-content>
             <ion-toggle [checked]="showStockColumns"
                         (click)="showStockColumns = !showStockColumns">{{ "calculator.result.stocksimul" | translate }}</ion-toggle>
@@ -245,4 +237,70 @@
             </ion-grid>
         </ion-card-content>
     </ion-card>
+
+  <ion-card *ngIf="segment === 'results' && resultViews === 'summary'">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="tableHeader">
+          <ion-col
+            size="12">{{ "calculator.summary.tbl-header" | translate }}&nbsp;{{ currentYear + getYears() + 1 }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-1" | translate }}</ion-col>
+          <ion-col size="2" class="summaryCell">
+            {{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-2" | translate }}</ion-col>
+          <ion-col size="2" class="summaryCell">
+            {{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-3" | translate: {value: getYears()} }}</ion-col>
+          <ion-col size="2" class="summaryCell">
+            {{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-4" | translate: {value: getYears()} }}</ion-col>
+          <ion-col size="2" class="summaryCell">
+            {{ getAccumulatedDividendsReinvested() | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-5" | translate: {value: getYears()} }}</ion-col>
+          <ion-col size="2" class="summaryCell">
+            {{ (getAccumulatedDividends() - getAccumulatedDividendsReinvested()) | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">
+            {{ "calculator.summary.tblrow.row-6" | translate }} {{ currentYear + getYears() + 1 }} (%)
+          </ion-col>
+          <ion-col size="2"
+            class="summaryCell">{{ getFinalDividendPercentage() | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">
+            {{ "calculator.summary.tblrow.row-7" | translate }} {{ currentYear + getYears() + 1 }} (€)
+          </ion-col>
+          <ion-col size="2"
+            class="summaryCell">{{ getFinalDividendIncome() | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" class="summaryCell">
+            {{ "calculator.summary.tblrow.row-8" | translate }} {{ currentYear + getYears() + 1 }} (€)
+          </ion-col>
+          <ion-col size="2"
+            class="summaryCell">{{ (getFinalDividendIncome() / 12) | number:'1.2-2':'de-DE' }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

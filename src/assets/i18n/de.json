@@ -20,7 +20,7 @@
     "result-header": "Ergebnisse",
     "disclaimer": "Alle Berechnungen auf dieser Seite erfolgen ohne Gewähr und es kann und wird keine Garantie für die Richtigkeit der Ergebnisse übernommen!",
     "result": {
-      "title": "Entwicklung über die Zeit",
+      "title": "Detailansicht",
       "stocksimul": "Zeige Aktien-Simulation",
       "tblheader": {
         "col-1": "Jahr",
@@ -56,7 +56,7 @@
       }
     },
     "graph": {
-      "title": "Grafische Darstellung",
+      "title": "Grafiken",
       "legend": "Legende",
       "investing": {
         "title": "Einzahlungen",
