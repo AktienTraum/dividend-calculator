@@ -8,16 +8,15 @@ import {CalculatorService} from "../services/calculator.service";
 import {StorageService} from "../storage/storage.service";
 import {ViewportScroller} from "@angular/common";
 import {ParameterIF} from "../interfaces/parameter-if";
-import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
 import {GraphService} from "../services/graph.service";
 import {LegendPosition} from "@swimlane/ngx-charts";
+import {CommonService} from "../services/common.service";
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'calculator.page.html',
   styleUrls: ['calculator.page.scss'],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-field-inside-dialog-workaround'}},
   ]
 })
 export class CalculatorPage {
@@ -44,14 +43,13 @@ export class CalculatorPage {
     private calculatorService: CalculatorService,
     private graphService: GraphService,
     private storageService: StorageService,
+    private commonService: CommonService,
     private viewportScroller: ViewportScroller,
     //private toaster: NgToastService
     ) {
-
     this.currentYear = functions.currentYear();
     this.initForm();
     this.storageData = this.storageService.load();
-
   }
 
   initForm() {
@@ -202,50 +200,27 @@ export class CalculatorPage {
 
   showInput() {
     this.segment = 'input';
-
-    const element = document.getElementById('input');
-    element!.click();
-    this.focusSegment('input');
+    this.commonService.focusSegment('input');
   }
 
   showResult() {
     this.segment = 'results';
-
-    const element = document.getElementById('results');
-    element!.click();
-    this.focusSegment('results');
-  }
-
-  focusSegment(segment: string) {
-    document.getElementById(segment)!.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-      inline: 'center'
-    });
+    this.commonService.focusSegment('results');
   }
 
   showResultTable() {
     this.resultViews = 'table';
-
-    const element = document.getElementById('table');
-    element!.click();
-    this.focusSegment('table');
+    this.commonService.focusSegment('table');
   }
 
   showResultSummary() {
     this.resultViews = 'summary';
-
-    const element = document.getElementById('summary');
-    element!.click();
-    this.focusSegment('summary');
+    this.commonService.focusSegment('summary');
   }
 
   showResultGraph() {
     this.resultViews = 'graph';
-
-    const element = document.getElementById('graph');
-    element!.click();
-    this.focusSegment('graph');
+    this.commonService.focusSegment('graph');
   }
 
   protected readonly LegendPosition = LegendPosition;

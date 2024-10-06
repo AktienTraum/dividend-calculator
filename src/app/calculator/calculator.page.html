@@ -140,7 +140,8 @@
 
                     <ion-col>{{ "calculator.result.tblheader.col-1" | translate }}</ion-col>
                     <ion-col *ngIf="showStockColumns" id="stock-price-simulation-trigger"
-                        matTooltip="{{ 'calculator.result.tblheader.col-2-tt' | translate }}">
+                             lcTooltip="{{ 'calculator.result.tblheader.col-2-tt' | translate }}"
+                             lcTooltipPlacement="horizontal">
                         {{ "calculator.result.tblheader.col-2" | translate }}
                     </ion-col>
                     <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-3" | translate }}</ion-col>
@@ -157,7 +158,7 @@
                     <ion-col class="priceGains">{{ "calculator.result.tblheader.col-14" | translate }}</ion-col>
                 </ion-row>
                 <ng-container *ngFor="let elem of result; let y = index">
-                    <ion-row [matTooltip]="contentRowTooltip(y)">
+                    <ion-row [lcTooltip]="contentRowTooltip(y)" lcTooltipPlacement="horizontal">
                         <ion-col [ngClass]="{'baseRow': y === 0}">
                             {{ currentYear + y }}
                         </ion-col>

@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-segment [value]="segment">
+      <ion-segment-button value="community" id="community" (click)="showCommunity()">
+        <ion-label>{{ "header.menu.community" | translate }}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="news" id="news" (click)="showNews()">
+        <ion-label>{{ "header.menu.news" | translate }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-community-content *ngIf="segment === 'community'"></app-community-content>
+  <app-community-news *ngIf="segment === 'news'"></app-community-news>
+</ion-content>
