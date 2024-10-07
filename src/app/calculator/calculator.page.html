@@ -1,356 +1,458 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-      <ion-segment [value]="segment">
-          <ion-segment-button value="input" id="input" (click)="showInput()">
-              <ion-label>{{ "calculator.form.title" | translate }}</ion-label>
+<ion-menu menuId="load-menu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ "calculator.form.load" | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-button (click)="doLoadItem(0)"
+                [disabled]="!storageData[0].inuse"
+                fill="outline"
+                class="storageButton"
+                id="load-toast-1">
+      {{ "calculator.form.slot-1" | translate }}
+    </ion-button><br>
+    <ion-button (click)="doLoadItem(1)"
+                [disabled]="!storageData[1].inuse"
+                fill="outline"
+                class="storageButton"
+                id="load-toast-2">
+      {{ "calculator.form.slot-2" | translate }}
+    </ion-button>
+    <br>
+    <ion-button (click)="doLoadItem(2)"
+                [disabled]="!storageData[2].inuse"
+                fill="outline"
+                class="storageButton"
+                id="load-toast-3">
+      {{ "calculator.form.slot-3" | translate }}
+    </ion-button>
+    <br>
+    <ion-button (click)="doLoadItem(3)"
+                [disabled]="!storageData[3].inuse"
+                fill="outline"
+                class="storageButton"
+                id="load-toast-4">
+      {{ "calculator.form.slot-4" | translate }}
+    </ion-button>
+
+    <ion-toast trigger="load-toast-1" message='{{ "messages.parametersloaded" | translate }}' [duration]="5000"></ion-toast>
+    <ion-toast trigger="load-toast-2" message='{{ "messages.parametersloaded" | translate }}' [duration]="5000"></ion-toast>
+    <ion-toast trigger="load-toast-3" message='{{ "messages.parametersloaded" | translate }}' [duration]="5000"></ion-toast>
+    <ion-toast trigger="load-toast-4" message='{{ "messages.parametersloaded" | translate }}' [duration]="5000"></ion-toast>
+  </ion-content>
+</ion-menu>
+
+<ion-menu menuId="save-menu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ "calculator.form.save" | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-button (click)="doSave(0)"
+                fill="outline"
+                class="storageButton"
+                id="save-toast-1">
+      {{ "calculator.form.slot-1" | translate }}
+    </ion-button><br>
+    <ion-button (click)="doSave(1)"
+                fill="outline"
+                class="storageButton"
+                id="save-toast-2">
+      {{ "calculator.form.slot-2" | translate }}
+    </ion-button><br>
+    <ion-button (click)="doSave(2)"
+                fill="outline"
+                class="storageButton"
+                id="save-toast-3">
+      {{ "calculator.form.slot-3" | translate }}
+    </ion-button><br>
+    <ion-button (click)="doSave(3)"
+                fill="outline"
+                class="storageButton"
+                id="save-toast-4">
+      {{ "calculator.form.slot-4" | translate }}
+    </ion-button>
+
+    <ion-toast trigger="save-toast-1" message='{{ "messages.parameterssaved" | translate }}' [duration]="5000"></ion-toast>
+    <ion-toast trigger="save-toast-2" message='{{ "messages.parameterssaved" | translate }}' [duration]="5000"></ion-toast>
+    <ion-toast trigger="save-toast-3" message='{{ "messages.parameterssaved" | translate }}' [duration]="5000"></ion-toast>
+    <ion-toast trigger="save-toast-4" message='{{ "messages.parameterssaved" | translate }}' [duration]="5000"></ion-toast>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-segment [value]="segment">
+            <ion-segment-button value="input" id="input" (click)="showInput()">
+                <ion-label>{{ "calculator.form.title" | translate }}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="results" id="results" (click)="showResult()">
+                <ion-label>{{ "calculator.result-header" | translate }}</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+      <ion-segment [value]="resultViews" *ngIf="segment === 'results'">
+          <ion-segment-button value="table" id="table" (click)="showResultTable()">
+              <ion-label>{{ "calculator.result.title" | translate }}</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="results" id="results" (click)="showResult()">
-              <ion-label>{{ "calculator.result-header" | translate }}</ion-label>
+          <ion-segment-button value="summary" id="summary" (click)="showResultSummary()">
+              <ion-label>{{ "calculator.summary.title" | translate }}</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="graph" id="graph" (click)="showResultGraph()">
+              <ion-label>{{ "calculator.graph.title" | translate }}</ion-label>
           </ion-segment-button>
       </ion-segment>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-    <ion-segment [value]="resultViews" *ngIf="segment === 'results'">
-        <ion-segment-button value="table" id="table" (click)="showResultTable()">
-            <ion-label>{{ "calculator.result.title" | translate }}</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="summary" id="summary" (click)="showResultSummary()">
-            <ion-label>{{ "calculator.summary.title" | translate }}</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="graph" id="graph" (click)="showResultGraph()">
-            <ion-label>{{ "calculator.graph.title" | translate }}</ion-label>
-        </ion-segment-button>
-    </ion-segment>
+      <ion-card *ngIf="segment === 'input'">
+          <ion-card-content>
+              <form [formGroup]="calculatorForm">
+                  <ion-range
+                          aria-label="Custom range"
+                          [min]="1"
+                          [max]="100"
+                          [value]="5"
+                          [pin]="true"
+                          [ticks]="true"
+                          [snaps]="true"
+                          formControlName="years"
+                  ></ion-range>
+                  {{ "calculator.form.interval" | translate }}: {{ getYears() }}
+                  ({{ "calculator.form.until" | translate }} {{ getUntilYear() }})
 
-    <ion-card *ngIf="segment === 'input'">
-        <ion-card-content>
-            <form [formGroup]="calculatorForm">
-                <ion-range
-                        aria-label="Custom range"
-                        [min]="1"
-                        [max]="100"
-                        [value]="5"
-                        [pin]="true"
-                        [ticks]="true"
-                        [snaps]="true"
-                        formControlName="years"
-                ></ion-range>
-                {{ "calculator.form.interval" | translate }}: {{ getYears() }}
-                ({{ "calculator.form.until" | translate }} {{ getUntilYear() }})
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.initialInvestment" | translate }}'
+                                 type="number"
+                                 formControlName="initialInvestment"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.initialInvestment" | translate }}'
-                               type="number"
-                               formControlName="initialInvestment"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.initialDividends" | translate }}'
+                                 type="number"
+                                 formControlName="initialDividends"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.initialDividends" | translate }}'
-                               type="number"
-                               formControlName="initialDividends"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.initialPriceGains" | translate }}'
+                                 type="number"
+                                 formControlName="initialPriceGains"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.initialPriceGains" | translate }}'
-                               type="number"
-                               formControlName="initialPriceGains"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.priceGainPercentage" | translate }}'
+                                 type="number"
+                                 formControlName="priceGainPercentage"
+                                 min="-100" max="100"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.priceGainPercentage" | translate }}'
-                               type="number"
-                               formControlName="priceGainPercentage"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.yearlyInvestment" | translate }}'
+                                 type="number"
+                                 formControlName="yearlyInvestment"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.yearlyInvestment" | translate }}'
-                               type="number"
-                               formControlName="yearlyInvestment"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.yearlyInvestmentIncrease" | translate }}'
+                                 type="number"
+                                 formControlName="yearlyInvestmentIncrease"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.yearlyInvestmentIncrease" | translate }}'
-                               type="number"
-                               formControlName="yearlyInvestmentIncrease"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.dividendReinvestmentPercentage" | translate }}'
+                                 type="number"
+                                 formControlName="dividendReinvestmentPercentage"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.dividendReinvestmentPercentage" | translate }}'
-                               type="number"
-                               formControlName="dividendReinvestmentPercentage"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.initialDividendPercentage" | translate }}'
+                                 type="number"
+                                 formControlName="initialDividendPercentage"
+                                 min="0" max="100"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.initialDividendPercentage" | translate }}'
-                               type="number"
-                               formControlName="initialDividendPercentage"
-                               min="0" max="100"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.yearlyDividendPercentageIncrease" | translate }}'
+                                 type="number"
+                                 formControlName="yearlyDividendPercentageIncrease"
+                                 min="-100" max="100"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.yearlyDividendPercentageIncrease" | translate }}'
-                               type="number"
-                               formControlName="yearlyDividendPercentageIncrease"
-                               min="0" max="100"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.taxPercentage" | translate }}'
+                                 type="number"
+                                 formControlName="taxPercentage"
+                                 min="0" max="100"></ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.taxPercentage" | translate }}'
-                               type="number"
-                               formControlName="taxPercentage"
-                               min="0" max="100"></ion-input>
-                </ion-item>
+                  <ion-item>
+                      <ion-input labelPlacement="stacked"
+                                 label='{{ "calculator.form.yearlyTaxFreeSum" | translate }}'
+                                 type="number"
+                                 formControlName="yearlyTaxFreeSum">
+                      </ion-input>
+                  </ion-item>
 
-                <ion-item>
-                    <ion-input labelPlacement="stacked"
-                               label='{{ "calculator.form.yearlyTaxFreeSum" | translate }}'
-                               type="number"
-                               formControlName="yearlyTaxFreeSum">
-                    </ion-input>
-                </ion-item>
+                  <ion-button (click)="doCalculate()" [disabled]="!calculatorForm.valid">
+                    {{ "calculator.form.submit" | translate }}
+                      <ion-icon slot="start" md="arrow-forward-outline"></ion-icon>
+                  </ion-button>
 
-                <ion-button (click)="doCalculate()">{{ "calculator.form.submit" | translate }}
-                    <ion-icon slot="start" md="arrow-forward"></ion-icon>
+                <ion-button (click)="doLoadStorageForLoad()"
+                            lcTooltip='{{ "calculator.form.load-tooltip" | translate }}'
+                            fill="outline">
+                  {{ "calculator.form.load" | translate }}
+                  <ion-icon slot="start" md="reload-outline"></ion-icon>
                 </ion-button>
 
-            </form>
-        </ion-card-content>
+                <ion-button (click)="doLoadStorageForSave()"
+                            lcTooltip='{{ "calculator.form.save-tooltip" | translate }}'
+                            [disabled]="!calculatorForm.valid"
+                            fill="outline">
+                  {{ "calculator.form.save" | translate }}
+                  <ion-icon slot="start" md="save-outline"></ion-icon>
+                </ion-button>
+              </form>
+          </ion-card-content>
+      </ion-card>
+
+
+      <ion-card *ngIf="segment === 'results' && resultViews === 'table'">
+          <ion-card-content>
+              <ion-toggle [checked]="showStockColumns"
+                          (click)="showStockColumns = !showStockColumns">{{ "calculator.result.stocksimul" | translate }}</ion-toggle>
+              <br>
+              <ion-grid>
+                  <ion-row class="tableHeader">
+
+                      <ion-col>{{ "calculator.result.tblheader.col-1" | translate }}</ion-col>
+                      <ion-col *ngIf="showStockColumns" id="stock-price-simulation-trigger"
+                               lcTooltip="{{ 'calculator.result.tblheader.col-2-tt' | translate }}"
+                               lcTooltipPlacement="horizontal">
+                          {{ "calculator.result.tblheader.col-2" | translate }}
+                      </ion-col>
+                      <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-3" | translate }}</ion-col>
+                      <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-4" | translate }}</ion-col>
+                      <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-5" | translate }}</ion-col>
+                      <ion-col>{{ "calculator.result.tblheader.col-6" | translate }}</ion-col>
+                      <ion-col>{{ "calculator.result.tblheader.col-7" | translate }}</ion-col>
+                      <ion-col>{{ "calculator.result.tblheader.col-8" | translate }}</ion-col>
+                      <ion-col>{{ "calculator.result.tblheader.col-9" | translate }}</ion-col>
+                      <ion-col>{{ "calculator.result.tblheader.col-10" | translate }}</ion-col>
+                      <ion-col>{{ "calculator.result.tblheader.col-11" | translate }}</ion-col>
+                      <ion-col>{{ "calculator.result.tblheader.col-12" | translate }}</ion-col>
+                      <ion-col class="priceGains">{{ "calculator.result.tblheader.col-13" | translate }}</ion-col>
+                      <ion-col class="priceGains">{{ "calculator.result.tblheader.col-14" | translate }}</ion-col>
+                  </ion-row>
+                  <ng-container *ngFor="let elem of result; let y = index">
+                      <ion-row [lcTooltip]="contentRowTooltip(y)" lcTooltipPlacement="horizontal">
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              {{ currentYear + y }}
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                              {{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                              {{ elem.shares.averagePurchasePrice | number:'1.2-2':'de-DE' }}
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                              {{ elem.dividend.currentDividendPerShare | number:'1.2-2':'de-DE' }}€ /
+                              {{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}%
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                              {{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }} /
+                              {{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              {{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              <span *ngIf="y > 0">
+                                  {{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
+                              </span>
+                              <span *ngIf="y === 0">
+                                  -
+                              </span>
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              <span *ngIf="y > 0">
+                                  {{ elem.kpis.investedSumPerYear | number:'1.2-2':'de-DE' }}
+                              </span>
+                              <span *ngIf="y === 0">
+                                  -
+                              </span>
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              <span *ngIf="y > 0">
+                                  {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}
+                              </span>
+                              <span *ngIf="y === 0">
+                                  -
+                              </span>
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              <span *ngIf="y > 0">
+                                  {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}
+                              </span>
+                              <span *ngIf="y === 0">
+                                  -
+                              </span>
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              <span *ngIf="y > 0">
+                                  {{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}
+                              </span>
+                              <span *ngIf="y === 0">
+                                  -
+                              </span>
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              <span *ngIf="y > 0">
+                                  {{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}
+                              </span>
+                              <span *ngIf="y === 0">
+                                  -
+                              </span>
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              {{ elem.kpis.accumulatedPriceGains | number:'1.2-2':'de-DE' }}
+                          </ion-col>
+                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                              {{ elem.kpis.accumulatedAssetsInclundingPriceGains | number:'1.2-2':'de-DE' }}
+                          </ion-col>
+                      </ion-row>
+                  </ng-container>
+              </ion-grid>
+          </ion-card-content>
+      </ion-card>
+
+    <ion-card *ngIf="segment === 'results' && resultViews === 'summary'">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="tableHeader">
+            <ion-col
+              size="12">{{ "calculator.summary.tbl-header" | translate }}&nbsp;{{ currentYear + getYears() + 1 }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-1" | translate }}</ion-col>
+            <ion-col size="2" class="summaryCell">
+              {{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-2" | translate }}</ion-col>
+            <ion-col size="2" class="summaryCell">
+              {{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-3" | translate: {value: getYears()} }}</ion-col>
+            <ion-col size="2" class="summaryCell">
+              {{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-4" | translate: {value: getYears()} }}</ion-col>
+            <ion-col size="2" class="summaryCell">
+              {{ getAccumulatedDividendsReinvested() | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-5" | translate: {value: getYears()} }}</ion-col>
+            <ion-col size="2" class="summaryCell">
+              {{ (getAccumulatedDividends() - getAccumulatedDividendsReinvested()) | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">
+              {{ "calculator.summary.tblrow.row-6" | translate }} {{ currentYear + getYears() + 1 }} (%)
+            </ion-col>
+            <ion-col size="2"
+              class="summaryCell">{{ getFinalDividendPercentage() | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">
+              {{ "calculator.summary.tblrow.row-7" | translate }} {{ currentYear + getYears() + 1 }} (€)
+            </ion-col>
+            <ion-col size="2"
+              class="summaryCell">{{ getFinalDividendIncome() | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" class="summaryCell">
+              {{ "calculator.summary.tblrow.row-8" | translate }} {{ currentYear + getYears() + 1 }} (€)
+            </ion-col>
+            <ion-col size="2"
+              class="summaryCell">{{ (getFinalDividendIncome() / 12) | number:'1.2-2':'de-DE' }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
     </ion-card>
 
-
-    <ion-card *ngIf="segment === 'results' && resultViews === 'table'">
-        <ion-card-content>
-            <ion-toggle [checked]="showStockColumns"
-                        (click)="showStockColumns = !showStockColumns">{{ "calculator.result.stocksimul" | translate }}</ion-toggle>
-            <br>
-            <ion-grid>
-                <ion-row class="tableHeader">
-
-                    <ion-col>{{ "calculator.result.tblheader.col-1" | translate }}</ion-col>
-                    <ion-col *ngIf="showStockColumns" id="stock-price-simulation-trigger"
-                             lcTooltip="{{ 'calculator.result.tblheader.col-2-tt' | translate }}"
-                             lcTooltipPlacement="horizontal">
-                        {{ "calculator.result.tblheader.col-2" | translate }}
-                    </ion-col>
-                    <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-3" | translate }}</ion-col>
-                    <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-4" | translate }}</ion-col>
-                    <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-5" | translate }}</ion-col>
-                    <ion-col>{{ "calculator.result.tblheader.col-6" | translate }}</ion-col>
-                    <ion-col>{{ "calculator.result.tblheader.col-7" | translate }}</ion-col>
-                    <ion-col>{{ "calculator.result.tblheader.col-8" | translate }}</ion-col>
-                    <ion-col>{{ "calculator.result.tblheader.col-9" | translate }}</ion-col>
-                    <ion-col>{{ "calculator.result.tblheader.col-10" | translate }}</ion-col>
-                    <ion-col>{{ "calculator.result.tblheader.col-11" | translate }}</ion-col>
-                    <ion-col>{{ "calculator.result.tblheader.col-12" | translate }}</ion-col>
-                    <ion-col class="priceGains">{{ "calculator.result.tblheader.col-13" | translate }}</ion-col>
-                    <ion-col class="priceGains">{{ "calculator.result.tblheader.col-14" | translate }}</ion-col>
-                </ion-row>
-                <ng-container *ngFor="let elem of result; let y = index">
-                    <ion-row [lcTooltip]="contentRowTooltip(y)" lcTooltipPlacement="horizontal">
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            {{ currentYear + y }}
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
-                            {{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
-                            {{ elem.shares.averagePurchasePrice | number:'1.2-2':'de-DE' }}
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
-                            {{ elem.dividend.currentDividendPerShare | number:'1.2-2':'de-DE' }}€ /
-                            {{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}%
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
-                            {{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }} /
-                            {{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            {{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            <span *ngIf="y > 0">
-                                {{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
-                            </span>
-                            <span *ngIf="y === 0">
-                                -
-                            </span>
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            <span *ngIf="y > 0">
-                                {{ elem.kpis.investedSumPerYear | number:'1.2-2':'de-DE' }}
-                            </span>
-                            <span *ngIf="y === 0">
-                                -
-                            </span>
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            <span *ngIf="y > 0">
-                                {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}
-                            </span>
-                            <span *ngIf="y === 0">
-                                -
-                            </span>
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            <span *ngIf="y > 0">
-                                {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}
-                            </span>
-                            <span *ngIf="y === 0">
-                                -
-                            </span>
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            <span *ngIf="y > 0">
-                                {{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}
-                            </span>
-                            <span *ngIf="y === 0">
-                                -
-                            </span>
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            <span *ngIf="y > 0">
-                                {{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}
-                            </span>
-                            <span *ngIf="y === 0">
-                                -
-                            </span>
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            {{ elem.kpis.accumulatedPriceGains | number:'1.2-2':'de-DE' }}
-                        </ion-col>
-                        <ion-col [ngClass]="{'baseRow': y === 0}">
-                            {{ elem.kpis.accumulatedAssetsInclundingPriceGains | number:'1.2-2':'de-DE' }}
-                        </ion-col>
-                    </ion-row>
-                </ng-container>
-            </ion-grid>
-        </ion-card-content>
+    <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
+      <ion-card-header>
+        <b>{{ "calculator.graph.investing.title" | translate }}</b>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="graph">
+          <ngx-charts-line-chart
+            [results]="dataPayments"
+            [view]="view"
+            [animations]="true"
+            [showGridLines]="true"
+            [legend]="true"
+            [legendTitle]="graphLegend()"
+            [legendPosition]="LegendPosition.Below"
+            [roundDomains]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [yAxisTickFormatting]="currencyFormatterLC">
+          </ngx-charts-line-chart>
+        </div>
+      </ion-card-content>
     </ion-card>
 
-  <ion-card *ngIf="segment === 'results' && resultViews === 'summary'">
-    <ion-card-content>
-      <ion-grid>
-        <ion-row class="tableHeader">
-          <ion-col
-            size="12">{{ "calculator.summary.tbl-header" | translate }}&nbsp;{{ currentYear + getYears() + 1 }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-1" | translate }}</ion-col>
-          <ion-col size="2" class="summaryCell">
-            {{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-2" | translate }}</ion-col>
-          <ion-col size="2" class="summaryCell">
-            {{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-3" | translate: {value: getYears()} }}</ion-col>
-          <ion-col size="2" class="summaryCell">
-            {{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-4" | translate: {value: getYears()} }}</ion-col>
-          <ion-col size="2" class="summaryCell">
-            {{ getAccumulatedDividendsReinvested() | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">{{ "calculator.summary.tblrow.row-5" | translate: {value: getYears()} }}</ion-col>
-          <ion-col size="2" class="summaryCell">
-            {{ (getAccumulatedDividends() - getAccumulatedDividendsReinvested()) | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">
-            {{ "calculator.summary.tblrow.row-6" | translate }} {{ currentYear + getYears() + 1 }} (%)
-          </ion-col>
-          <ion-col size="2"
-            class="summaryCell">{{ getFinalDividendPercentage() | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">
-            {{ "calculator.summary.tblrow.row-7" | translate }} {{ currentYear + getYears() + 1 }} (€)
-          </ion-col>
-          <ion-col size="2"
-            class="summaryCell">{{ getFinalDividendIncome() | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="10" class="summaryCell">
-            {{ "calculator.summary.tblrow.row-8" | translate }} {{ currentYear + getYears() + 1 }} (€)
-          </ion-col>
-          <ion-col size="2"
-            class="summaryCell">{{ (getFinalDividendIncome() / 12) | number:'1.2-2':'de-DE' }}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+    <p></p>
 
-  <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
-    <ion-card-header>
-      <b>{{ "calculator.graph.investing.title" | translate }}</b>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="graph">
-        <ngx-charts-line-chart
-          [results]="dataPayments"
-          [view]="view"
-          [animations]="true"
-          [showGridLines]="true"
-          [legend]="true"
-          [legendTitle]="graphLegend()"
-          [legendPosition]="LegendPosition.Below"
-          [roundDomains]="true"
-          [xAxis]="true"
-          [yAxis]="true"
-          [yAxisTickFormatting]="currencyFormatterLC">
-        </ngx-charts-line-chart>
-      </div>
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
+      <ion-card-header>
+        <b>{{ "calculator.graph.totalassets.title" | translate }}</b>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="graph">
+          <ngx-charts-line-chart
+            [results]="dataTotalAssets"
+            [view]="view"
+            [animations]="true"
+            [showGridLines]="true"
+            [legend]="true"
+            [legendTitle]="graphLegend()"
+            [legendPosition]="LegendPosition.Below"
+            [roundDomains]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [yAxisTickFormatting]="currencyFormatterLC">
+          </ngx-charts-line-chart>
+        </div>
+      </ion-card-content>
+    </ion-card>
 
-  <p></p>
-
-  <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
-    <ion-card-header>
-      <b>{{ "calculator.graph.totalassets.title" | translate }}</b>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="graph">
-        <ngx-charts-line-chart
-          [results]="dataTotalAssets"
-          [view]="view"
-          [animations]="true"
-          [showGridLines]="true"
-          [legend]="true"
-          [legendTitle]="graphLegend()"
-          [legendPosition]="LegendPosition.Below"
-          [roundDomains]="true"
-          [xAxis]="true"
-          [yAxis]="true"
-          [yAxisTickFormatting]="currencyFormatterLC">
-        </ngx-charts-line-chart>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-</ion-content>
+  </ion-content>
+</div>

@@ -142,7 +142,6 @@
   },
   "messages": {
     "parameterssaved": "Parameters have been saved in browser.",
-    "parametersloaded": "Parameter have been restored from Browser.",
-    "parametersloadederror": "No parameters have been saved in this browser or an error has occurred."
+    "parametersloaded": "Parameter have been restored from Browser."
   }
 }

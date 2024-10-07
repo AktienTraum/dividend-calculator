@@ -143,7 +143,6 @@
   },
   "messages": {
     "parameterssaved": "Die Parameter wurden im Browser gespeichert.",
-    "parametersloaded": "Die Parameter wurden aus dem Browser geladen.",
-    "parametersloadederror": "Es wurden noch keine Parameter in diesem Browser gespeichert oder es ist ein Fehler aufgetreten."
+    "parametersloaded": "Die Parameter wurden aus dem Browser geladen."
   }
 }

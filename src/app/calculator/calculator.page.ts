@@ -11,6 +11,7 @@ import {ParameterIF} from "../interfaces/parameter-if";
 import {GraphService} from "../services/graph.service";
 import {LegendPosition} from "@swimlane/ngx-charts";
 import {CommonService} from "../services/common.service";
+import {MenuController} from "@ionic/angular";
 
 @Component({
   selector: 'app-tab1',
@@ -45,6 +46,7 @@ export class CalculatorPage {
     private storageService: StorageService,
     private commonService: CommonService,
     private viewportScroller: ViewportScroller,
+    private menuCtrl: MenuController
     //private toaster: NgToastService
     ) {
     this.currentYear = functions.currentYear();
@@ -138,22 +140,26 @@ export class CalculatorPage {
 
   doSave(id: number) {
     this.storageService.save(id, this.getFormValues());
-    //this.toaster.info(this.translate.instant('messages.parameterssaved'), '', 5000);
+    this.menuCtrl.close('save-menu');
   }
 
- /* doLoadStorage() {
+  doLoadStorageForLoad() {
     this.storageData = this.storageService.load();
+    this.menuCtrl.open('load-menu');
+  }
+
+  doLoadStorageForSave() {
+    this.storageData = this.storageService.load();
+    this.menuCtrl.open('save-menu');
   }
 
   doLoadItem(id: number) {
     if (this.storageData[id].params != null) {
       let parameters = this.storageData[id].params;
-      this.setFormValues(parameters);
-      //this.toaster.info(this.translate.instant('messages.parametersloaded'), '', 5000);
-    } else {
-      //this.toaster.danger(this.translate.instant('messages.parametersloadederror'), '', 5000);
+      this.setFormValues(parameters!);
+      this.menuCtrl.close('load-menu');
     }
-  }*/
+  }
 
   getFormValues() {
     return {
