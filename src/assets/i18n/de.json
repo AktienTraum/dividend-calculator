@@ -150,6 +150,8 @@
   },
   "messages": {
     "parameterssaved": "Die Parameter wurden im Browser gespeichert.",
-    "parametersloaded": "Die Parameter wurden aus dem Browser geladen."
+    "parametersloaded": "Die Parameter wurden aus dem Browser geladen.",
+    "german": "Deutsch wurde als Sprache ausgewählt.",
+    "english": "English has been selected for the language."
   }
 }

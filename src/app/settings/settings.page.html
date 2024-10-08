@@ -16,10 +16,23 @@
       </ion-card-header>
       <ion-card-content>
         <div class="languageSelection">
-          <img class="germanFlag" src="/assets/images/german-flag.png" width="25px" height="15px" (click)="switchToGerman()"/>
-          <img class="englishFlag" src="/assets/images/english-flag.png" width="25px" height="15px" (click)="switchToEnglish()"/>
+          <ion-button (click)="switchToGerman()"
+                      fill="clear"
+                      id="load-german"
+                      class="germanFlag">
+            <img src="/assets/images/german-flag.png" width="45" height="35"/>
+          </ion-button>
+          <ion-button (click)="switchToEnglish()"
+                      fill="clear"
+                      id="load-english"
+                      class="englishFlag">
+            <img  src="/assets/images/english-flag.png" width="45" height="35"/>
+          </ion-button>
         </div>
       </ion-card-content>
     </ion-card>
   </ion-content>
+
+  <ion-toast trigger="load-german" message='{{ "messages.german" | translate }}' [duration]="5000"></ion-toast>
+  <ion-toast trigger="load-english" message='{{ "messages.english" | translate }}' [duration]="5000"></ion-toast>
 </div>

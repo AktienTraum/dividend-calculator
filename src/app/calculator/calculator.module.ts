@@ -8,6 +8,7 @@ import {NgxTranslateModule} from "../translate/translate.module";
 import {LineChartModule} from "@swimlane/ngx-charts";
 import {TooltipDirective} from "@babybeet/angular-tooltip";
 import {CalculatorRoutingModule} from "./calculator-routing.module";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {CalculatorRoutingModule} from "./calculator-routing.module";
     CommonModule,
     FormsModule,
     CalculatorRoutingModule,
-    NgxTranslateModule,
+    TranslateModule,
     ReactiveFormsModule,
     LineChartModule,
     TooltipDirective

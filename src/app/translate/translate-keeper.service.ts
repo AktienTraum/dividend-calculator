@@ -7,16 +7,15 @@ import {LineseriesIf} from "../interfaces/lineseries-if";
 })
 export class TranslateKeeperService {
 
-  private selectedLanguage = 'de';
 
   constructor() {
   }
 
   setSelectedLanguage(lang: string) {
-    this.selectedLanguage = lang;
+    localStorage.setItem('dividendentraum-language', lang);
   }
 
   getSelectedLanguage() {
-    return this.selectedLanguage;
+    return localStorage.getItem('dividendentraum-language');
   }
 }

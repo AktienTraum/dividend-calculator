@@ -1,4 +1,4 @@
-import {Component, numberAttribute, OnInit} from '@angular/core';
+import {AfterContentInit, Component, numberAttribute, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {CalculationIF} from "../interfaces/calculation-if";
 import {StorageIf} from "../storage/storage-if";
@@ -12,6 +12,7 @@ import {GraphService} from "../services/graph.service";
 import {LegendPosition} from "@swimlane/ngx-charts";
 import {CommonService} from "../services/common.service";
 import {MenuController} from "@ionic/angular";
+import {TranslateKeeperService} from "../translate/translate-keeper.service";
 
 @Component({
   selector: 'app-tab1',
@@ -20,7 +21,7 @@ import {MenuController} from "@ionic/angular";
   providers: [
   ]
 })
-export class CalculatorPage {
+export class CalculatorPage implements AfterContentInit {
 
   segment = 'input';
   resultViews = 'table';
@@ -41,17 +42,23 @@ export class CalculatorPage {
   constructor(
     functions: FunctionsService,
     private translate: TranslateService,
+    private translateKeeper: TranslateKeeperService,
     private calculatorService: CalculatorService,
     private graphService: GraphService,
     private storageService: StorageService,
     private commonService: CommonService,
     private viewportScroller: ViewportScroller,
     private menuCtrl: MenuController
-    //private toaster: NgToastService
     ) {
     this.currentYear = functions.currentYear();
     this.initForm();
     this.storageData = this.storageService.load();
+  }
+
+  ngAfterContentInit(): void {
+    if (this.translateKeeper.getSelectedLanguage()) {
+      this.translate.use(this.translateKeeper.getSelectedLanguage()!);
+    }
   }
 
   initForm() {
