@@ -1,0 +1,25 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-segment [value]="'settings'">
+          <ion-segment-button value="settings" id="settings">
+            <ion-label>{{ "header.menu.settings" | translate }}</ion-label>
+          </ion-segment-button>
+      </ion-segment>
+     </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <ion-card>
+      <ion-card-header>
+        <h2>{{ "settings.language.title" | translate }}</h2>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="languageSelection">
+          <img class="germanFlag" src="/assets/images/german-flag.png" width="25px" height="15px" (click)="switchToGerman()"/>
+          <img class="englishFlag" src="/assets/images/english-flag.png" width="25px" height="15px" (click)="switchToEnglish()"/>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>

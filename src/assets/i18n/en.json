@@ -9,7 +9,9 @@
       "documentation": "Documentation",
       "about": "About",
       "imprint": "Imprint",
-      "privacy": "Privacy Policy"
+      "privacy": "Privacy Policy",
+      "info": "About",
+      "settings": "Settings"
     }
   },
   "about": {
@@ -139,6 +141,11 @@
   },
   "privacy": {
     "content": "No personal data is processed or stored on this website."
+  },
+  "settings": {
+    "language": {
+      "title": "Languages"
+    }
   },
   "messages": {
     "parameterssaved": "Parameters have been saved in browser.",

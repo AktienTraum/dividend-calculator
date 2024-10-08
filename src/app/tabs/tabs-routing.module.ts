@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../information/information.module').then(m => m.InformationModule)
       },
       {
+        path: 'settings',
+        loadChildren: () => import('../settings/settings.module').then(m => m.SettingsModule)
+      },
+      {
         path: '',
         redirectTo: '/calculator',
         pathMatch: 'full'

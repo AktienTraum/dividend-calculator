@@ -9,7 +9,9 @@
       "documentation": "Dokumentation",
       "about": "Über",
       "imprint": "Impressum",
-      "privacy": "Datenschutz"
+      "privacy": "Datenschutz",
+      "info": "Über",
+      "settings": "Einstellungen"
     }
   },
   "about": {
@@ -140,6 +142,11 @@
   },
   "privacy": {
     "content": "Auf dieser Webseite werden keine personenbezogenen Daten verarbeitet oder gespeichert."
+  },
+  "settings": {
+    "language": {
+      "title": "Sprachen"
+    }
   },
   "messages": {
     "parameterssaved": "Die Parameter wurden im Browser gespeichert.",
