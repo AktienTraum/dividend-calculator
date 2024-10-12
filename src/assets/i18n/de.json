@@ -15,7 +15,7 @@
     }
   },
   "about": {
-    "version": "3.0.0",
+    "version": "3.1.0 (12. Oktober 2024)",
     "aktientraum": "Dividendenrechner - Version",
     "disclaimer": "Dies ist ein nicht kommerzielles Spaßprojekt. Alle Berechnungen auf dieser Seite erfolgen ohne Gewähr und es kann und wird keine Garantie für die Richtigkeit der Ergebnisse übernommen!",
     "cite": "Wenn jemand gute Aktien hat, wäre er verrückt, wenn er nur wegen eines Kursrückschlags verkaufen würde. Ich suche Unternehmen, die ich verstehe und von deren Zukunftsaussichten ich überzeugt bin."
@@ -63,15 +63,15 @@
       "legend": "Legende",
       "investing": {
         "title": "Einzahlungen",
-        "value-1": "Reinvestierte Dividenden (€)",
-        "value-2": "Investierte Summe (€)",
-        "value-3": "Gesamtsumme (€)"
+        "value-1": "Reinvestierte Dividenden",
+        "value-2": "Investierte Summe",
+        "value-3": "Gesamtsumme"
       },
       "totalassets": {
         "title": "Gesamtvermögen",
-        "value-1": "Investierte Summe (€)",
-        "value-2": "Investierte Summe (inkl. reinvestierte Dividenden) (€)",
-        "value-3": "Summe Vermögen (inkl. Kurgewinne) (€)"
+        "value-1": "Investierte Summe",
+        "value-2": "Investierte Summe (inkl. reinvestierte Dividenden)",
+        "value-3": "Vermögen (inkl. Kurgewinne)"
       }
     },
     "form": {
@@ -125,7 +125,8 @@
     "release-2.0.0": "<p>Der Dividendenrechner unterstützt jetzt verschiedene Sprachvarianten. Das ist schon ein großer Schritt und daher auch der größere Versionssprung.</p><p>Den Anfang mach die englische Version und dank <i>DeepL</i> sind andere Sprachvarianten ab jetzt hauptsächlich eine Fleißarbeit.</p>",
     "release-2.1.0": "<p><b>Bugfix:</b> Die Kursgewinne wurden bisher deutlich zu gering berechnet. Das hatte keine Auswirkung auf die Berechnung der Dividenden, aber auf die Gesamtsumme des Vermögens.</p><p>Im Graphen für die Einzahlungen wird jetzt auch die Summe der Einzahlungen angezeigt. Zusätzlich gibt es einen zweiten Graphen für das Gesamtvermögen. Um diese Werte akurater berechnen zu können kann man jetzt angeben, wieviel der bereits investierten Summe aus Dividenden stammt.</p>",
     "release-2.2.0": "<p>Eingegebene Parameter können jetzt unter verschiedenen Speicherplätzen gespeichert und wieder geladen werden. Somit entfällt die Notwendigkeit die Werte für die Berechnung bei neuen Besuchen dieses Rechners immer wieder neu eingeben zu müssen. Die Werte werden im Browser (Local Storage) gespeichert. D. h. wird ein anderer Browser benutzt, so stehen die in diesem Browser gespeicherten Werte dort nicht zur Verfügung.</p><p>Im Community-Bereich eine Liste mit - recht bekannten - Tools eingefügt, die ich gerne nutze.</p>",
-    "release-3.0.0": "<p>Es hat noch einmal einen ziemlich großen Umbau an der Oberfläche gegeben, um die mobile Benutzung zu optimieren. Dabei gab es keine Veränderungen an der Berechnung.</p><p>Es ist jetzt auch möglich negative Werte für jährliche Kurssteigerungen und die Steigerung der Dividendenrendite anzugeben.</p>"
+    "release-3.0.0": "<p>Es hat noch einmal einen ziemlich großen Umbau an der Oberfläche gegeben, um die mobile Benutzung zu optimieren. Dabei gab es keine Veränderungen an der Berechnung.</p><p>Es ist jetzt auch möglich negative Werte für jährliche Kurssteigerungen und die Steigerung der Dividendenrendite anzugeben.</p>",
+    "release-3.1.0": "<p>Auf kleinen Auflösungen werden jetzt in der Tabellenansicht Spalten ausgeblendet. Dafür gibt es eine zusätzliche Kartenansicht.</p><p>Bei der Berechnung der initialen Dividende wird jetzt auch die Steuer berücksichtigt.</p>"
   },
   "documentation": {
     "disclaimer": "<p>Im Vergleich zum \"alten\" Dividendenrechner, der noch Teil es AktienTraum-Blogs war (den es nicht mehr gibt ;-)), hat es einige grundlegende Veränderungen in der Berechnung gegeben.</p><p>Bei dem alten Rechner war die Dividendenrendite der führende Faktor. Diese wurde aber mit der Zeit zu schnell zu groß, da u. A. die dämpfende Wirkung von Kurssteigerungen auf die Dividendenrendite nicht berücksichtigt wurde.</p><p>Um dieses Problem zu umgehen, simuliert der neue Dividendenrechner im Hintergrund den Kauf von Aktien. Auf diesen Aktien wird dann die Dividende berechnet und diese Dividende führt dann - zusammen mit dem Aktienkurs - zur Dividendenrendite.</p><p>Auch wird jetzt immer mit Netto-Werten gerechnet, es sei denn man gibt beim Zinssatz eine Null ein. Denn nur dann ist das zur Verfügung stehende Kapital für Aktienkäufe aus den Dividenden realistisch.</p><p>Mehr Details zur Berechnung werden hier nach und nach dokumentiert und sind ansonsten natürlich auch aus dem <a href=\"https://github.com/AktienTraum/dividendenrechner\" target=\"_blank\">Source Code</a> ersichtlich.</p>"

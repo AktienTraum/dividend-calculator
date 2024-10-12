@@ -239,22 +239,21 @@
               <br>
               <ion-grid>
                   <ion-row class="tableHeader">
-
                       <ion-col>{{ "calculator.result.tblheader.col-1" | translate }}</ion-col>
-                      <ion-col *ngIf="showStockColumns"
+                      <ion-col class="hidden-xs hidden-sm hidden-md" *ngIf="showStockColumns"
                                lcTooltip="{{ 'calculator.result.tblheader.col-2-tt' | translate }}"
                                lcTooltipPlacement="horizontal">
                           {{ "calculator.result.tblheader.col-2" | translate }}
                       </ion-col>
-                      <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-3" | translate }}</ion-col>
-                      <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-4" | translate }}</ion-col>
-                      <ion-col *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-5" | translate }}</ion-col>
+                      <ion-col class="hidden-xs hidden-sm hidden-md" *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-3" | translate }}</ion-col>
+                      <ion-col class="hidden-xs hidden-sm" *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-4" | translate }}</ion-col>
+                      <ion-col class="hidden-xs hidden-sm hidden-md" *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-5" | translate }}</ion-col>
                       <ion-col>{{ "calculator.result.tblheader.col-6" | translate }}</ion-col>
-                      <ion-col>{{ "calculator.result.tblheader.col-7" | translate }}</ion-col>
-                      <ion-col>{{ "calculator.result.tblheader.col-8" | translate }}</ion-col>
+                      <ion-col class="hidden-xs hidden-sm">{{ "calculator.result.tblheader.col-7" | translate }}</ion-col>
+                      <ion-col class="hidden-xs hidden-sm">{{ "calculator.result.tblheader.col-8" | translate }}</ion-col>
                       <ion-col>{{ "calculator.result.tblheader.col-9" | translate }}</ion-col>
-                      <ion-col>{{ "calculator.result.tblheader.col-10" | translate }}</ion-col>
-                      <ion-col>{{ "calculator.result.tblheader.col-11" | translate }}</ion-col>
+                      <ion-col class="hidden-xs hidden-sm hidden-md">{{ "calculator.result.tblheader.col-10" | translate }}</ion-col>
+                      <ion-col class="hidden-xs hidden-sm">{{ "calculator.result.tblheader.col-11" | translate }}</ion-col>
                       <ion-col class="hidden-xs hidden-sm hidden-md hidden-lg">{{ "calculator.result.tblheader.col-12" | translate }}</ion-col>
                       <ion-col class="hidden-xs hidden-sm hidden-md hidden-lg">{{ "calculator.result.tblheader.col-13" | translate }}</ion-col>
                       <ion-col class="hidden-xs hidden-sm hidden-md hidden-lg">{{ "calculator.result.tblheader.col-14" | translate }}</ion-col>
@@ -264,62 +263,46 @@
                           <ion-col [ngClass]="{'baseRow': y === 0}">
                               {{ currentYear + y }}
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                          <ion-col class="hidden-xs hidden-sm hidden-md" [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
                               {{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                          <ion-col class="hidden-xs hidden-sm" [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
                               {{ elem.shares.averagePurchasePrice | number:'1.2-2':'de-DE' }}
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                          <ion-col class="hidden-xs hidden-sm hidden-md" [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
                               {{ elem.dividend.currentDividendPerShare | number:'1.2-2':'de-DE' }}€ /
                               {{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}%
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
+                          <ion-col class="hidden-xs hidden-sm" [ngClass]="{'baseRow': y === 0}" *ngIf="showStockColumns">
                               {{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }} /
                               {{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}
                           </ion-col>
                           <ion-col [ngClass]="{'baseRow': y === 0}">
                               {{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                          <ion-col class="hidden-xs hidden-sm" [ngClass]="{'baseRow': y === 0}">
                               <span *ngIf="y > 0">
                                   {{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
                               </span>
-                              <span *ngIf="y === 0">
-                                  -
-                              </span>
+                              <span *ngIf="y === 0">-</span>
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                          <ion-col class="hidden-xs hidden-sm" [ngClass]="{'baseRow': y === 0}">
                               <span *ngIf="y > 0">
                                   {{ elem.kpis.investedSumPerYear | number:'1.2-2':'de-DE' }}
                               </span>
-                              <span *ngIf="y === 0">
-                                  -
-                              </span>
+                              <span *ngIf="y === 0">-</span>
                           </ion-col>
                           <ion-col [ngClass]="{'baseRow': y === 0}">
-                              <span *ngIf="y > 0">
-                                  {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}
-                              </span>
-                              <span *ngIf="y === 0">
-                                  -
-                              </span>
+                              {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}">
-                              <span *ngIf="y > 0">
-                                  {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}
-                              </span>
-                              <span *ngIf="y === 0">
-                                  -
-                              </span>
+                          <ion-col class="hidden-xs hidden-sm hidden-md" [ngClass]="{'baseRow': y === 0}">
+                              {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}
                           </ion-col>
-                          <ion-col [ngClass]="{'baseRow': y === 0}">
+                          <ion-col class="hidden-xs hidden-sm" [ngClass]="{'baseRow': y === 0}">
                               <span *ngIf="y > 0">
                                   {{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}
                               </span>
-                              <span *ngIf="y === 0">
-                                  -
-                              </span>
+                              <span *ngIf="y === 0">-</span>
                           </ion-col>
                           <ion-col class="hidden-xs hidden-sm hidden-md hidden-lg" [ngClass]="{'baseRow': y === 0}">
                               <span *ngIf="y > 0">
@@ -403,19 +386,13 @@
                 <ion-row>
                   <ion-col size="9">{{ "calculator.result.tblheader.col-9" | translate }}</ion-col>
                   <ion-col size="3" class="ion-text-end">
-                    <span *ngIf="y > 0">
-                        {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}
-                    </span>
-                    <span *ngIf="y === 0">-</span>
+                    {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col size="9">{{ "calculator.result.tblheader.col-10" | translate }}</ion-col>
                   <ion-col size="3" class="ion-text-end">
-                    <span *ngIf="y > 0">
-                        {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}
-                    </span>
-                    <span *ngIf="y === 0">-</span>
+                    {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}
                   </ion-col>
                 </ion-row>
                 <ion-row>

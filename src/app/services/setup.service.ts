@@ -18,7 +18,18 @@ export class SetupService {
                               currentDividendPerShare: number): CalculationIF {
 
     const initialStockAmount = this.functions.calculateStockAmount(parameters.initialInvestment, currentStockPrice);
-    const dividendPayout = this.functions.calculateDividendPayout(initialStockAmount, currentDividendPerShare);
+    let dividendPayout = this.functions.calculateDividendPayout(initialStockAmount, currentDividendPerShare);
+
+    // Apply taxes on dividends
+    if (dividendPayout > parameters.yearlyTaxFreeSum) {
+      let taxPayment =
+        this.functions.calculateTaxPayment(dividendPayout, parameters.taxPercentage, parameters.yearlyTaxFreeSum);
+
+      dividendPayout -= taxPayment;
+    }
+
+    let investedDividendFactor =
+      this.functions.calculateInvestedDividendsFactor(dividendPayout, parameters.dividendReinvestmentPercentage);
 
     return {
       dividend: {
@@ -34,7 +45,7 @@ export class SetupService {
         investedSumPerYear: parameters.initialInvestment,
         accumulatedStockAmount: initialStockAmount,
         dividendPayout: dividendPayout,
-        dividendPayoutReinvested: dividendPayout,
+        dividendPayoutReinvested: investedDividendFactor,
         dividendPercentage: parameters.initialDividendPercentage,
         accumulatedDividendPayout: dividendPayout,
         accumulatedPayments: parameters.initialInvestment - parameters.initialDividends,
