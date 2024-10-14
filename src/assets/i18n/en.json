@@ -23,7 +23,7 @@
   "calculator": {
     "result-header": "Results",
     "result": {
-      "title": "Detailed Results",
+      "title": "Details",
       "stocksimul": "Show stock simulation",
       "tblheader": {
         "col-1": "Year",
@@ -57,6 +57,9 @@
         "row-7": "Annual passive income from year",
         "row-8": "Monthly passive income from year"
       }
+    },
+    "csv": {
+      "title": "CSV"
     },
     "graph": {
       "title": "Graphs",

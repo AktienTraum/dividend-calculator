@@ -8,7 +8,6 @@ import {CalculatorService} from "../services/calculator.service";
 import {StorageService} from "../storage/storage.service";
 import {ViewportScroller} from "@angular/common";
 import {ParameterIF} from "../interfaces/parameter-if";
-import {GraphService} from "../services/graph.service";
 import {LegendPosition} from "@swimlane/ngx-charts";
 import {CommonService} from "../services/common.service";
 import {MenuController} from "@ionic/angular";
@@ -33,10 +32,6 @@ export class CalculatorPage implements AfterContentInit {
 
   result: CalculationIF[] = [];
 
-  dataPayments: any;
-  dataTotalAssets: any;
-  view: [number, number] = [800, 500];
-
   storageData: StorageIf[];
 
   constructor(
@@ -44,12 +39,10 @@ export class CalculatorPage implements AfterContentInit {
     private translate: TranslateService,
     private translateKeeper: TranslateKeeperService,
     private calculatorService: CalculatorService,
-    private graphService: GraphService,
     private storageService: StorageService,
     private commonService: CommonService,
     private viewportScroller: ViewportScroller,
-    private menuCtrl: MenuController
-    ) {
+    private menuCtrl: MenuController) {
     this.currentYear = functions.currentYear();
     this.initForm();
     this.storageData = this.storageService.load();
@@ -80,20 +73,7 @@ export class CalculatorPage implements AfterContentInit {
 
   doCalculate() {
     this.showResult();
-
     this.result = this.calculatorService.calculate(this.getFormValues());
-
-    this.dataPayments = this.graphService.getPaymentData(this.result,
-      this.currentYear,
-      this.translate.instant('calculator.graph.investing.value-1'),
-      this.translate.instant('calculator.graph.investing.value-2'),
-      this.translate.instant('calculator.graph.investing.value-3'));
-    this.dataTotalAssets = this.graphService.getTotalAssetsData(this.result,
-      this.currentYear,
-      this.translate.instant('calculator.graph.totalassets.value-1'),
-      this.translate.instant('calculator.graph.totalassets.value-2'),
-      this.translate.instant('calculator.graph.totalassets.value-3'));
-
     this.viewportScroller.scrollToPosition([0, 0]);
   }
 
@@ -125,24 +105,12 @@ export class CalculatorPage implements AfterContentInit {
     return this.result[this.getYears()].kpis.dividendPayout;
   }
 
-  currencyFormatterLC(moneyAmount: any): string {
-    const currencyFormat = new Intl.NumberFormat("de-DE", {
-      style: "currency",
-      currency: "EUR",
-    });
-    return currencyFormat.format(moneyAmount);
-  }
-
   contentRowTooltip(rowNum: number) {
     if (rowNum == 0) {
       return this.translate.instant('calculator.result.firstrow-tt');
     } else {
       return '';
     }
-  }
-
-  graphLegend() {
-    return this.translate.instant('calculator.graph.legend');
   }
 
   doSave(id: number) {
@@ -234,6 +202,11 @@ export class CalculatorPage implements AfterContentInit {
   showResultGraph() {
     this.resultViews = 'graph';
     this.commonService.focusSegment('graph');
+  }
+
+  showResultCsv() {
+    this.resultViews = 'csv';
+    this.commonService.focusSegment('csv');
   }
 
   protected readonly LegendPosition = LegendPosition;

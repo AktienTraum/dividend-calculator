@@ -23,7 +23,7 @@
   "calculator": {
     "result-header": "Ergebnisse",
     "result": {
-      "title": "Detailansicht",
+      "title": "Details",
       "stocksimul": "Zeige Aktien-Simulation",
       "tblheader": {
         "col-1": "Jahr",
@@ -57,6 +57,9 @@
         "row-7": "Jährliches passives Einkommen ab dem Jahr",
         "row-8": "Monatliches passives Einkommen ab dem Jahr"
       }
+    },
+    "csv": {
+      "title": "CSV"
     },
     "graph": {
       "title": "Grafiken",

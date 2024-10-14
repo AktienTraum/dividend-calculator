@@ -9,6 +9,8 @@ import {LineChartModule} from "@swimlane/ngx-charts";
 import {TooltipDirective} from "@babybeet/angular-tooltip";
 import {CalculatorRoutingModule} from "./calculator-routing.module";
 import {TranslateModule} from "@ngx-translate/core";
+import {CalculatorGraphComponent} from "./calculator-graph/calculator-graph.component";
+import {CalculatorCsvComponent} from "./calculator-csv/calculator-csv.component";
 
 @NgModule({
   imports: [
@@ -21,6 +23,6 @@ import {TranslateModule} from "@ngx-translate/core";
     LineChartModule,
     TooltipDirective
   ],
-  declarations: [CalculatorPage]
+  declarations: [CalculatorPage, CalculatorGraphComponent, CalculatorCsvComponent]
 })
 export class CalculatorModule {}

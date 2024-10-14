@@ -1,0 +1,30 @@
+{{ "calculator.result.tblheader.col-1" | translate }}; {{ "calculator.result.tblheader.col-2" | translate }}; {{ "calculator.result.tblheader.col-3" | translate }}; {{ "calculator.result.tblheader.col-4" | translate }}; {{ "calculator.result.tblheader.col-5" | translate }};
+{{ "calculator.result.tblheader.col-6" | translate }};
+{{ "calculator.result.tblheader.col-7" | translate }};
+{{ "calculator.result.tblheader.col-8" | translate }};
+{{ "calculator.result.tblheader.col-9" | translate }};
+{{ "calculator.result.tblheader.col-10" | translate }};
+{{ "calculator.result.tblheader.col-11" | translate }};
+{{ "calculator.result.tblheader.col-12" | translate }};
+{{ "calculator.result.tblheader.col-13" | translate }};
+{{ "calculator.result.tblheader.col-14" | translate }}
+<br>
+<ng-container *ngFor="let elem of result; let y = index">
+      {{ currentYear + y }};
+      {{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }};
+      {{ elem.shares.averagePurchasePrice | number:'1.2-2':'de-DE' }};
+      {{ elem.dividend.currentDividendPerShare | number:'1.2-2':'de-DE' }}€ /
+      {{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}%;
+      {{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }} /
+      {{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.investedSumPerYear | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.accumulatedPriceGains | number:'1.2-2':'de-DE' }};
+      {{ elem.kpis.accumulatedAssetsInclundingPriceGains | number:'1.2-2':'de-DE' }}
+      <br>
+</ng-container>

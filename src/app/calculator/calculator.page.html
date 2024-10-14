@@ -107,6 +107,9 @@
           <ion-segment-button value="graph" id="graph" (click)="showResultGraph()">
               <ion-label>{{ "calculator.graph.title" | translate }}</ion-label>
           </ion-segment-button>
+          <ion-segment-button value="csv" id="csv" (click)="showResultCsv()">
+            <ion-label>{{ "calculator.csv.title" | translate }}</ion-label>
+          </ion-segment-button>
       </ion-segment>
 
       <ion-card *ngIf="segment === 'input'">
@@ -439,56 +442,56 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9">{{ "calculator.summary.tblrow.row-1" | translate }}</ion-col>
-            <ion-col size="3" class="ion-text-end">
+            <ion-col size="6">{{ "calculator.summary.tblrow.row-1" | translate }}</ion-col>
+            <ion-col size="6" class="ion-text-end">
               {{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9" class="summaryCell">{{ "calculator.summary.tblrow.row-2" | translate }}</ion-col>
-            <ion-col size="3" class="summaryCell, ion-text-end">
+            <ion-col size="6" class="summaryCell">{{ "calculator.summary.tblrow.row-2" | translate }}</ion-col>
+            <ion-col size="6" class="summaryCell, ion-text-end">
               {{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9" class="summaryCell">{{ "calculator.summary.tblrow.row-3" | translate: {value: getYears()} }}</ion-col>
-            <ion-col size="3" class="summaryCell, ion-text-end">
+            <ion-col size="6" class="summaryCell">{{ "calculator.summary.tblrow.row-3" | translate: {value: getYears()} }}</ion-col>
+            <ion-col size="6" class="summaryCell, ion-text-end">
               {{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9" class="summaryCell">{{ "calculator.summary.tblrow.row-4" | translate: {value: getYears()} }}</ion-col>
-            <ion-col size="3" class="summaryCell, ion-text-end">
+            <ion-col size="6" class="summaryCell">{{ "calculator.summary.tblrow.row-4" | translate: {value: getYears()} }}</ion-col>
+            <ion-col size="6" class="summaryCell, ion-text-end">
               {{ getAccumulatedDividendsReinvested() | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9" class="summaryCell">{{ "calculator.summary.tblrow.row-5" | translate: {value: getYears()} }}</ion-col>
-            <ion-col size="3" class="summaryCell, ion-text-end">
+            <ion-col size="6" class="summaryCell">{{ "calculator.summary.tblrow.row-5" | translate: {value: getYears()} }}</ion-col>
+            <ion-col size="6" class="summaryCell, ion-text-end">
               {{ (getAccumulatedDividends() - getAccumulatedDividendsReinvested()) | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9" class="summaryCell">
+            <ion-col size="6" class="summaryCell">
               {{ "calculator.summary.tblrow.row-6" | translate }} {{ currentYear + getYears() + 1 }} (%)
             </ion-col>
-            <ion-col size="3"
+            <ion-col size="6"
               class="summaryCell, ion-text-end">{{ getFinalDividendPercentage() | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9" class="summaryCell">
+            <ion-col size="6" class="summaryCell">
               {{ "calculator.summary.tblrow.row-7" | translate }} {{ currentYear + getYears() + 1 }}
             </ion-col>
-            <ion-col size="3"
+            <ion-col size="6"
               class="summaryCell, ion-text-end">{{ getFinalDividendIncome() | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="9" class="summaryCell">
+            <ion-col size="6" class="summaryCell">
               {{ "calculator.summary.tblrow.row-8" | translate }} {{ currentYear + getYears() + 1 }}
             </ion-col>
-            <ion-col size="3"
+            <ion-col size="6"
               class="summaryCell, ion-text-end">{{ (getFinalDividendIncome() / 12) | number:'1.2-2':'de-DE' }}
             </ion-col>
           </ion-row>
@@ -496,53 +499,15 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
-      <ion-card-header>
-        <b>{{ "calculator.graph.investing.title" | translate }}</b>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="graph">
-          <ngx-charts-line-chart
-            [results]="dataPayments"
-            [view]="view"
-            [animations]="true"
-            [showGridLines]="true"
-            [legend]="true"
-            [legendTitle]="graphLegend()"
-            [legendPosition]="LegendPosition.Below"
-            [roundDomains]="true"
-            [xAxis]="true"
-            [yAxis]="true"
-            [yAxisTickFormatting]="currencyFormatterLC">
-          </ngx-charts-line-chart>
-        </div>
-      </ion-card-content>
-    </ion-card>
+    <app-calculator-graph *ngIf="segment === 'results' && resultViews === 'graph'"
+                          [result]="result"
+                          [currentYear]="currentYear">
+    </app-calculator-graph>
 
-    <p></p>
-
-    <ion-card *ngIf="segment === 'results' && resultViews === 'graph'">
-      <ion-card-header>
-        <b>{{ "calculator.graph.totalassets.title" | translate }}</b>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="graph">
-          <ngx-charts-line-chart
-            [results]="dataTotalAssets"
-            [view]="view"
-            [animations]="true"
-            [showGridLines]="true"
-            [legend]="true"
-            [legendTitle]="graphLegend()"
-            [legendPosition]="LegendPosition.Below"
-            [roundDomains]="true"
-            [xAxis]="true"
-            [yAxis]="true"
-            [yAxisTickFormatting]="currencyFormatterLC">
-          </ngx-charts-line-chart>
-        </div>
-      </ion-card-content>
-    </ion-card>
+    <app-calculator-csv *ngIf="segment === 'results' && resultViews === 'csv'"
+                        [result]="result"
+                        [currentYear]="currentYear">
+    </app-calculator-csv>
 
   </ion-content>
 </div>
